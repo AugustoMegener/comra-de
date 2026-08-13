@@ -1,9 +1,8 @@
-
 { ... }:
-
 let
   inherit (builtins) attrNames filter match;
-in {
+in 
+{
   imports =
     map
       (fn: ./styles/${fn})

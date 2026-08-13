@@ -13,6 +13,7 @@
     ./monitors.nix
     ./autostart.nix
     ./input.nix
+    ./walker.nix
   ];
 
   home.packages = with pkgs; [

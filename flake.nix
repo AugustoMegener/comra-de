@@ -32,11 +32,11 @@
       homeConfigurations = forAllSystems (
           system:
           home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./config
-          ];
-        }
+            extraSpecialArgs = { inherit inputs; };
+            modules = [
+              ./config
+            ];
+          }
       );
     };
 }
