@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  wayland.windowManager.hyprland = {
+  /*wayland.windowManager.hyprland = {
     plugins = [ pkgs.hyprlandPlugins.hypr-dynamic-cursors ];
 
     extraConfig = ''
@@ -11,5 +11,5 @@
       autoLoad = true;
       content = ./config.lua;
     };
-  };
+  };*/
 }
