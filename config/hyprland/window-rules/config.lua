@@ -1,19 +1,11 @@
 hl.window_rule({
     name = "obsidian-borderless",
-    match = { class = "^obsidian$" },
+    match = { class = "^md\\.Obsidian$" },
     border_size = 0,
 })
-
-
-hl.window_rule({
-    name = "electon-borderless",
-    match = { class = "^electon$" },
-    border_size = 0,
-})
-
 hl.window_rule({
     name = "obsidian-workspace",
-    match = { class = "^obsidian$" },
+    match = { class = "^md\\.Obsidian$" },
     workspace = "1 silent",
 })
 
