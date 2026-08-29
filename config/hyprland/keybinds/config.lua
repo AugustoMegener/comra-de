@@ -58,3 +58,9 @@ hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+hl.bind("XF86TouchpadToggle", hl.dsp.exec_cmd(
+  "f=$XDG_RUNTIME_DIR/touchpad-enabled; d=$(hyprctl devices -j | jq -r '.mice[] | select(.name | test(\"touchpad\")) | .name'); s=$(cat \"$f\" 2>/dev/null || echo true); n=$([ \"$s\" = true ] && echo false || echo true); hyprctl eval \"hl.device({ name = '$d', enabled = $n })\"; echo \"$n\" > \"$f\""
+), { locked = true })
+
