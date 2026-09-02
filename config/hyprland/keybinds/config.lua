@@ -1,6 +1,6 @@
 local mainMod = "SUPER"
 
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("kitty zsh -ic 'source init-tmux'"))
+hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("zen-beta"))
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd("walker -m clipboard"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())

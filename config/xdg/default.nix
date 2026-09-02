@@ -1,52 +1,52 @@
 { pkgs, ... }:
 let
-  yazi-wrapper = pkgs.writeShellScript "yazi-wrapper.sh" ''
-    kitty -- yazi "$@"
-  '';
+yazi-wrapper = pkgs.writeShellScript "yazi-wrapper.sh" ''
+kitty -- yazi "$@"
+'';
 
-  termfilechooser-config = (pkgs.formats.toml {}).generate "config" {
-    filechooser = {
-      cmd = "yazi-wrapper.sh";
-      env = "TERMCMD=kitty --title termfilechooser";
-      default_dir = "$HOME";
-    };
+termfilechooser-config = (pkgs.formats.toml {}).generate "config" {
+  filechooser = {
+    cmd = "yazi-wrapper.sh";
+    env = "TERMCMD=kitty --title termfilechooser";
+    default_dir = "$HOME";
   };
-
-  xdg-portal-termfilechooser = pkgs.stdenv.mkDerivation rec {
-    pname = "xdg-desktop-portal-termfilechooser";
-    version = "unstable";
-    src = pkgs.fetchFromGitHub {
-      owner = "hunkyburrito";
-      repo = "xdg-desktop-portal-termfilechooser";
-      rev = "main";
-      sha256 = "sha256-zk/zUbq+fa977wuT/yuJ+bBawuTXKVJwLj2G8ITjMfU=";
-    };
-    nativeBuildInputs = [ pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.scdoc ];
-    buildInputs = [ pkgs.glib pkgs.dbus pkgs.xdg-desktop-portal pkgs.cmake pkgs.inih pkgs.json-glib pkgs.systemd ];
-    mesonFlags = [ "-Dsd-bus-provider=libsystemd" ];
-    postInstall = ''
-      cp ${termfilechooser-config} $out/share/xdg-desktop-portal-termfilechooser/config
-    '';
-  };
-  
-xdg.terminal-exec = {
-  enable = true;
-  package = pkgs.kitty; # ou o pacote do seu terminal
 };
 
-  yazi-kitty = pkgs.stdenv.mkDerivation {
-    pname = "yazi-kitty";
-    version = "1.0";
-    dontUnpack = true;
-    buildCommand = ''
-      mkdir -p $out/bin
-      cat > $out/bin/yazi-kitty.sh << 'SCRIPT'
-      #!/bin/sh
-      exec kitty -- dir-open "$@"
-      SCRIPT
-      chmod +x $out/bin/yazi-kitty.sh
-    '';
+xdg-portal-termfilechooser = pkgs.stdenv.mkDerivation rec {
+  pname = "xdg-desktop-portal-termfilechooser";
+  version = "unstable";
+  src = pkgs.fetchFromGitHub {
+    owner = "hunkyburrito";
+    repo = "xdg-desktop-portal-termfilechooser";
+    rev = "main";
+    sha256 = "sha256-zk/zUbq+fa977wuT/yuJ+bBawuTXKVJwLj2G8ITjMfU=";
   };
+  nativeBuildInputs = [ pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.scdoc ];
+  buildInputs = [ pkgs.glib pkgs.dbus pkgs.xdg-desktop-portal pkgs.cmake pkgs.inih pkgs.json-glib pkgs.systemd ];
+  mesonFlags = [ "-Dsd-bus-provider=libsystemd" ];
+  postInstall = ''
+    cp ${termfilechooser-config} $out/share/xdg-desktop-portal-termfilechooser/config
+    '';
+};
+
+xdg.terminal-exec = {
+  enable = true;
+  package = pkgs.kitty;
+};
+
+yazi-kitty = pkgs.stdenv.mkDerivation {
+  pname = "yazi-kitty";
+  version = "1.0";
+  dontUnpack = true;
+  buildCommand = ''
+    mkdir -p $out/bin
+    cat > $out/bin/yazi-kitty.sh << 'SCRIPT'
+#!/bin/sh
+    kitty -- zsh -ic 'y "$@"; zsh'
+    SCRIPT
+    chmod +x $out/bin/yazi-kitty.sh
+    '';
+};
 in
 {
   home.packages = [ yazi-kitty ];
@@ -54,7 +54,7 @@ in
   xdg.desktopEntries.yazi-kitty = {
     name = "Yazi";
     type = "Application";
-    exec = "dir-open %f";
+    exec = "yazi-kitty %f";
     terminal = false;
     noDisplay = true;
     mimeType = [ "inode/directory" ];
@@ -70,7 +70,7 @@ in
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk xdg-portal-termfilechooser ];
     config.common.default = [ "hyprland" "termfilechooser" ];
   };
-  
+
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -95,26 +95,26 @@ in
       "x-scheme-handler/https" = [ "zen-browser.desktop" ];
       "x-scheme-handler/unknown" = [ "zen-browser.desktop" ];
 
-      # LibreOffice Writer
+# LibreOffice Writer
       "application/vnd.oasis.opendocument.text" = [ "writer.desktop" ];
       "application/msword" = [ "writer.desktop" ];
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "writer.desktop" ];
       "application/rtf" = [ "writer.desktop" ];
 
-      # LibreOffice Calc
+# LibreOffice Calc
       "application/vnd.oasis.opendocument.spreadsheet" = [ "calc.desktop" ];
       "application/vnd.ms-excel" = [ "calc.desktop" ];
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "calc.desktop" ];
 
-      # LibreOffice Impress
+# LibreOffice Impress
       "application/vnd.oasis.opendocument.presentation" = [ "impress.desktop" ];
       "application/vnd.ms-powerpoint" = [ "impress.desktop" ];
       "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "impress.desktop" ];
 
-      # LibreOffice Draw
+# LibreOffice Draw
       "application/vnd.oasis.opendocument.graphics" = [ "draw.desktop" ];
 
-      # LibreOffice Math
+# LibreOffice Math
       "application/vnd.oasis.opendocument.formula" = [ "math.desktop" ];
     };
   };
