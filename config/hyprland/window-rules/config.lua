@@ -1,6 +1,6 @@
 hl.window_rule({
     name = "obsidian-borderless",
-    match = { class = "^md\\.Obsidian$" },
+    match = { class = "(?i).*obsidian.*" },
     border_size = 0,
 })
 hl.window_rule({
