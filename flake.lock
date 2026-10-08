@@ -11,11 +11,11 @@
         "xkb-monitor": "xkb-monitor"
       },
       "locked": {
-        "lastModified": 1791235106,
-        "narHash": "sha256-oOMxLB1d+x/R02h0ywiq21RdHHue9uR4K7bsh5CEGh0=",
+        "lastModified": 1791464549,
+        "narHash": "sha256-59GDEd6FOv1T7nOE6hukSJwMNXveW1MwhHzSDCCXrZU=",
         "owner": "AugustoMegener",
         "repo": "bolcshell",
-        "rev": "2b3e64e9d579f84b43ee7437d29fd7df0e3840bb",
+        "rev": "3d21eb7ab5e03975f19ce0df7627aeff82ff7b75",
         "type": "github"
       },
       "original": {
