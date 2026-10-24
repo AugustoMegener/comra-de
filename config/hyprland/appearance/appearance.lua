@@ -74,3 +74,11 @@ hl.animation({ leaf = "workspacesOut", enabled = false })
 -- hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear",  style = "slide" })
 
 hl.animation({ leaf = "zoomFactor",    enabled = true, speed = 7,    bezier = "quick" })
+
+
+hl.config({
+    animations = {
+        enabled = false,
+    },
+})
+
