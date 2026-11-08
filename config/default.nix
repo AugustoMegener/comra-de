@@ -5,7 +5,6 @@
     ./xdg
     ./programs-styles
     ./swaync
-    ./greeter
   ];
 
   gtk = {
@@ -25,6 +24,4 @@
   };
 
   qt.enable = true;
-
-nixosModules.greeter = import ./greeter { inherit bolcshell; };
 }
