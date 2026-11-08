@@ -25,4 +25,6 @@
   };
 
   qt.enable = true;
+
+nixosModules.greeter = import ./greeter { inherit bolcshell; };
 }

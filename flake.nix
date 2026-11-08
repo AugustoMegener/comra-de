@@ -13,6 +13,8 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
+      nixosModules.greeter = import ./config/greeter { inherit (inputs) bolcshell; };
+
       homeModules.default = { pkgs, ... }: {
         imports = [ ./config ];
         home.packages = [
