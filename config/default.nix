@@ -5,6 +5,7 @@
     ./xdg
     ./programs-styles
     ./swaync
+    ./greeter
   ];
 
   gtk = {
