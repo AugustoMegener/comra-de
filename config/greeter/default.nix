@@ -5,6 +5,7 @@
     home = "/var/lib/greeter";
     createHome = true;
   };
+  environment.systemPackages = [ pkgs.glib ];
   services.greetd = {
     enable = true;
     settings.default_session = {
