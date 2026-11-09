@@ -1,6 +1,10 @@
 { bolcshell }:
 { pkgs, inputs, ... }:
 {
+  users.users.greeter = {
+    home = "/var/lib/greeter";
+    createHome = true;
+  };
   services.greetd = {
     enable = true;
     settings.default_session = {
