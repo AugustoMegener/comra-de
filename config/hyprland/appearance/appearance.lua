@@ -43,6 +43,7 @@ hl.config({
         force_default_wallpaper = -1,
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
+        background_color = "rgba(26211cff)",
     },
 })
 
